@@ -7,84 +7,105 @@
   <meta name="description" content="Exhibition cum Workshop on Mines and Minerals in Andhra Pradesh — 1-2 Nov 2025 at KL University, Vijayawada." />
   <style>
     :root{
-      --accent:#6b4f1d; /* earthy gold/brown */
+      --accent:#a66c1e; /* warm mineral gold */
       --muted:#6b7280;
-      --bg:#f6f6f5;
-      --card:#ffffff;
-      --maxw:1100px;
+      --bg:#0f1115; /* dark base for richer parallax */
+      --card:#0f1720;
+      --glass: rgba(255,255,255,0.03);
+      --maxw:1200px;
       --radius:12px;
-      --glass: rgba(255,255,255,0.6);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      color-scheme: dark;
     }
     *{box-sizing:border-box}
-    body{margin:0;background:linear-gradient(180deg,#fbfbfa 0%,var(--bg) 100%);color:#222}
-    .wrap{max-width:var(--maxw);margin:24px auto;padding:0 18px}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#679ac4 0%, #4d74c3 60%);color:#e6eef6;scroll-behavior:smooth}
 
-    /* Header / Hero */
-    header{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+    /* Canvas full-screen for mouse particles */
+    #particle-canvas{position:fixed;inset:0;pointer-events:none;z-index:9998}
+
+    /* Cursor */
+    .cursor{position:fixed;left:0;top:0;width:36px;height:36px;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:9999;mix-blend-mode:screen;transition:transform .12s ease, background-color .18s ease, width .12s ease, height .12s ease}
+    .cursor.dot{background:radial-gradient(circle at 30% 30%, rgba(255,220,160,0.95), rgba(166,108,30,0.06) 40%)}
+    .cursor.big{width:84px;height:84px;background:radial-gradient(circle at 30% 30%, rgba(166,108,30,0.12), rgba(10,12,14,0) 45%)}
+
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:24px}
+
+    header{display:flex;align-items:center;justify-content:space-between;padding:12px 0;position:relative;z-index:10}
     .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:56px;height:56px;border-radius:8px;background:linear-gradient(135deg,#9b6a2f,#e0c06b);display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#d7b26e,#8f5d2a);display:flex;align-items:center;justify-content:center;color:#071019;font-weight:800;box-shadow:0 6px 20px rgba(0,0,0,0.6)}
     nav{display:flex;gap:12px;align-items:center}
-    nav a{color:var(--muted);text-decoration:none;font-weight:600}
-    .btn{background:var(--accent);color:white;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:700}
+    nav a{color:rgba(230,238,246,0.84);text-decoration:none;font-weight:600;padding:8px 10px;border-radius:8px}
+    nav a:hover{background:rgba(255,255,255,0.02)}
+    .btn{background:var(--accent);color:#071019;padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:800}
 
-    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-top:8px}
-    .hero-card{background:var(--card);padding:28px;border-radius:var(--radius);box-shadow:0 6px 24px rgba(31,41,55,0.06)}
-    .eyebrow{color:var(--accent);font-weight:700}
-    h1{margin:8px 0 6px;font-size:28px}
-    p.lead{color:var(--muted);margin:0 0 16px}
+    /* Hero with layered parallax */
+    .hero-wrap{position:relative;height:84vh;min-height:560px;overflow:hidden;border-radius:14px;margin:18px 0}
+    .layer{position:absolute;inset:0;will-change:transform;transition:transform 0.2s linear}
+
+    /* background layers */
+    .layer.bg{background:linear-gradient(180deg,#04111a 0%, #0b1a20 100%);filter:blur(8px) saturate(1.05);transform:translateZ(0)}
+    .layer.texture{background-image:radial-gradient(ellipse at 10% 20%, rgba(255,255,255,0.02), transparent 2%), radial-gradient(ellipse at 80% 80%, rgba(255,255,255,0.01), transparent 2%);opacity:0.85}
+
+    .layer.mid{background-image:linear-gradient(180deg, rgba(255,255,255,0.02), transparent 40%);display:flex;align-items:center;justify-content:center}
+    .hero-content{position:relative;z-index:5;max-width:1100px;margin:0 auto;padding:60px 28px;display:flex;gap:32px;align-items:center}
+    .hero-left{flex:1}
+    .eyebrow{color:var(--accent);font-weight:800}
+    h1{font-size:44px;line-height:1.02;margin:10px 0 10px}
+    p.lead{color:rgba(230,238,246,0.8);margin:0 0 16px}
     .meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
-    .meta div{background:var(--bg);padding:10px 12px;border-radius:10px;font-weight:600}
+    .meta div{background:rgba(56, 162, 224, 0.02);padding:10px 14px;border-radius:12px;font-weight:700}
 
-    .register-card{padding:18px;border-radius:12px;background:linear-gradient(180deg,rgba(107,79,29,0.06),rgba(234,220,181,0.02));}
-    .form-row{display:flex;gap:8px;margin-bottom:10px}
-    input,select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e6e6e6}
-    label{font-size:13px;color:#444;margin-bottom:6px;display:block}
-    .small{font-size:13px;color:var(--muted)}
+    .hero-right{width:420px;min-width:280px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:18px;border-radius:12px;backdrop-filter: blur(6px);box-shadow:0 10px 30px rgba(2,6,12,0.6)}
+    label{font-size:13px;color:#d7dfe8;margin-bottom:6px;display:block}
+    input,select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
 
     /* Sections */
-    section{margin:28px 0}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .card{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 6px 18px rgba(17,24,39,0.04)}
+    section{margin:42px 0;position:relative;z-index:6}
+    h2{font-size:28px;margin:0 0 12px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card.section{padding:20px}
     .speaker{display:flex;gap:12px;align-items:center}
-    .avatar{width:64px;height:64px;border-radius:8px;background:linear-gradient(135deg,#c7b197,#8f5d2a);display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+    .avatar{width:64px;height:64px;border-radius:8px;background:linear-gradient(135deg,#c7b197,#8f5d2a);display:flex;align-items:center;justify-content:center;color:#071019;font-weight:800}
 
-    /* Schedule */
-    .schedule-day{background:linear-gradient(180deg,#fff,#fbfaf8);padding:12px;border-radius:10px}
-    .session{display:flex;gap:12px;padding:8px 0;border-bottom:1px dashed #eee}
-    .session:last-child{border-bottom:0}
-    .time{min-width:86px;font-weight:700;color:var(--accent)}
+    /* Schedule styling */
+    .schedule-day{padding:14px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01))}
+    .session{display:flex;gap:12px;padding:10px 0;border-bottom:1px dashed rgba(255,255,255,0.03)}
+    .time{min-width:80px;font-weight:800;color:var(--accent)}
 
-    /* Venue */
-    .map{width:100%;height:260px;border-radius:10px;overflow:hidden;border:1px solid #eaeaea}
+    /* Small animations */
+    .fade-in{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.9,.3,1)}
+    .fade-in.show{opacity:1;transform:none}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:10px 14px;border-radius:10px}
 
-    /* Footer */
-    footer{padding:18px 0;color:var(--muted);text-align:center}
+    footer{padding:28px 0;color:rgba(210,220,230,0.7);text-align:center}
 
-    /* Responsive */
+    /* responsive */
     @media (max-width:980px){
-      .hero{grid-template-columns:1fr}
-      .grid{grid-template-columns:repeat(1,1fr)}
+      .grid{grid-template-columns:1fr}
+      .hero-content{flex-direction:column-reverse;padding:26px}
+      .hero-right{width:100%}
     }
     @media (max-width:640px){
-      h1{font-size:22px}
+      h1{font-size:28px}
       .logo{width:48px;height:48px}
+      .cursor{display:none} /* hide custom cursor on tiny screens for UX */
     }
 
-    /* Modal */
-    .modal{position:fixed;inset:0;background:rgba(8,8,10,0.45);display:flex;align-items:center;justify-content:center;padding:20px;visibility:hidden;opacity:0;transition:all .2s}
-    .modal.open{visibility:visible;opacity:1}
-    .modal-card{background:var(--card);padding:20px;border-radius:12px;max-width:480px;width:100%}
   </style>
 </head>
 <body>
+  <canvas id="particle-canvas"></canvas>
+  <div class="cursor" id="cursorDot"></div>
+  <div class="cursor big" id="cursorBig"></div>
+
   <div class="wrap">
     <header>
       <div class="brand">
         <div class="logo">MM</div>
         <div>
           <div style="font-weight:800">Exhibition & Workshop</div>
-          <div style="font-size:13px;color:var(--muted)">Mines & Minerals — Andhra Pradesh</div>
+          <div style="font-size:13px;color:rgba(230,238,246,0.7)">Mines & Minerals — Andhra Pradesh</div>
         </div>
       </div>
       <nav>
@@ -96,113 +117,89 @@
       </nav>
     </header>
 
-    <main>
-      <div class="hero">
-        <div class="hero-card">
-          <div class="eyebrow">KL University • Vijayawada</div>
-          <h1>Exhibition cum Workshop on Mines & Minerals in Andhra Pradesh</h1>
-          <p class="lead">Join industry experts, researchers, students and government representatives for a two-day exhibition and hands-on workshop exploring the mining and mineral resources of Andhra Pradesh.</p>
-          <div class="meta">
-            <div>📅 01–02 Nov 2025</div>
-            <div>📍 KL University, Vijayawada</div>
-            <div>🎓 Students • Industry • Researchers</div>
-          </div>
+    <!-- HERO: layered parallax -->
+    <div class="hero-wrap" id="hero">
+      <div class="layer bg" data-speed="0.12"></div>
+      <div class="layer texture" data-speed="0.22"></div>
+      <div class="layer mid" data-speed="0.42"></div>
 
-          <section style="margin-top:18px">
-            <h3 style="margin:0 0 8px">Why attend?</h3>
-            <ul style="margin:0;padding-left:18px;color:var(--muted)">
-              <li>Discover latest mineral exploration techniques and technologies.</li>
-              <li>Network with industry professionals and government agencies.</li>
-              <li>Hands-on workshops, panel discussions and exhibition stalls.</li>
-            </ul>
-          </section>
+      <div class="hero-content">
+        <div class="hero-left fade-in">
+          <div class="eyebrow">KL University • Vijayawada</div>
+          <h1>Exhibition cum Workshop on Mines & Minerals<br><span style="color:var(--accent)">01–02 Nov 2025</span></h1>
+          <p class="lead">Join experts, students and industry partners for a two-day deep dive into mineral exploration, sustainable mining and hands-on workshops at KL University.</p>
+
+          <div class="meta">
+            <div>📍 KL University</div>
+            <div>🎓 Students • Researchers</div>
+            <div>🔬 Workshops & Exhibits</div>
+          </div>
 
           <div style="margin-top:18px;display:flex;gap:12px">
             <a href="#register" class="btn">Register Now</a>
-            <a href="#schedule" style="text-decoration:none;padding:10px 14px;border-radius:8px;border:1px solid #eee;font-weight:700;color:var(--accent)">View Schedule</a>
+            <a href="#schedule" class="btn-ghost">View Schedule</a>
           </div>
         </div>
 
-        <aside class="register-card">
-          <div style="font-weight:800;margin-bottom:8px">Register for the Event</div>
-          <form id="regForm" onsubmit="return submitForm(event)">
-            <div class="form-row">
-              <div style="flex:1">
-                <label for="name">Name</label>
-                <input id="name" name="name" placeholder="Your full name" required />
+        <div class="hero-right">
+          <div class="card fade-in">
+            <form id="regForm" onsubmit="return submitForm(event)">
+              <div style="font-weight:800;margin-bottom:8px">Quick Register</div>
+              <label for="name">Name</label>
+              <input id="name" name="name" placeholder="Your full name" required />
+              <label for="email" style="margin-top:8px">Email</label>
+              <input id="email" name="email" type="email" placeholder="name@example.com" required />
+              <label for="category" style="margin-top:8px">Category</label>
+              <select id="category" name="category"><option>Student</option><option>Faculty / Researcher</option><option>Industry Professional</option><option>Government</option></select>
+              <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
+                <button type="submit" class="btn">Submit</button>
+                <button type="button" class="btn-ghost" onclick="openModal('info')">More info</button>
               </div>
-            </div>
-            <div class="form-row">
-              <div style="flex:1">
-                <label for="email">Email</label>
-                <input id="email" name="email" type="email" placeholder="name@example.com" required />
-              </div>
-            </div>
-            <div class="form-row">
-              <div style="flex:1">
-                <label for="org">Organization</label>
-                <input id="org" name="org" placeholder="Company / University" />
-              </div>
-              <div style="width:150px">
-                <label for="category">Category</label>
-                <select id="category" name="category">
-                  <option>Student</option>
-                  <option>Faculty / Researcher</option>
-                  <option>Industry Professional</option>
-                  <option>Government</option>
-                </select>
-              </div>
-            </div>
-            <div style="margin-top:8px">
-              <label for="notes">Notes (optional)</label>
-              <textarea id="notes" name="notes" rows="3" placeholder="Dietary restrictions / queries"></textarea>
-            </div>
-            <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
-              <button type="submit" class="btn">Submit Registration</button>
-              <div class="small">No payment required for standard registration.</div>
-            </div>
-          </form>
-        </aside>
+            </form>
+          </div>
+        </div>
       </div>
+    </div>
 
-      <section id="about">
-        <div class="card">
-          <h2 style="margin-top:0">About the Event</h2>
-          <p style="color:var(--muted)">This exhibition & workshop aims to showcase the mineral wealth and mining ecosystem of Andhra Pradesh. The event brings together academia, industry and government for knowledge exchange, demonstration of mining equipment, sample displays and hands-on training sessions for students and early-career researchers.</p>
+    <main>
+      <section id="about" class="fade-in">
+        <div class="card section">
+          <h2>About the Event</h2>
+          <p style="color:rgba(230,238,246,0.75)">This exhibition & workshop showcases the mineral wealth and mining ecosystem of Andhra Pradesh. It brings together academia, industry and government for knowledge exchange, demonstrations, and hands-on training sessions for students and early-career researchers.</p>
         </div>
       </section>
 
-      <section id="schedule">
+      <section id="schedule" class="fade-in">
         <h2>Schedule</h2>
         <div class="grid">
           <div class="card schedule-day">
             <h3 style="margin-top:0">Day 1 — 01 Nov 2025</h3>
-            <div class="session"><div class="time">09:30</div><div><strong>Opening & Keynote</strong><div class="small">Inauguration and keynote address by industry leader.</div></div></div>
-            <div class="session"><div class="time">11:00</div><div><strong>Exhibition Opens</strong><div class="small">Stall visits and demo sessions.</div></div></div>
-            <div class="session"><div class="time">14:00</div><div><strong>Technical Session I</strong><div class="small">Mineral exploration techniques.</div></div></div>
-            <div class="session"><div class="time">16:00</div><div><strong>Panel Discussion</strong><div class="small">Sustainable mining practices.</div></div></div>
+            <div class="session"><div class="time">09:30</div><div><strong>Opening & Keynote</strong><div class="small">Inauguration and keynote address.</div></div></div>
+            <div class="session"><div class="time">11:00</div><div><strong>Exhibition Opens</strong><div class="small">Stalls and demos.</div></div></div>
+            <div class="session"><div class="time">14:00</div><div><strong>Tech Session I</strong><div class="small">Exploration techniques.</div></div></div>
+            <div class="session"><div class="time">16:00</div><div><strong>Panel</strong><div class="small">Sustainability in mining.</div></div></div>
           </div>
 
           <div class="card schedule-day">
             <h3 style="margin-top:0">Day 2 — 02 Nov 2025</h3>
-            <div class="session"><div class="time">09:30</div><div><strong>Workshops — Track A</strong><div class="small">Hands-on: Geochemical sampling & analysis.</div></div></div>
-            <div class="session"><div class="time">11:30</div><div><strong>Workshops — Track B</strong><div class="small">Remote sensing and mapping.</div></div></div>
-            <div class="session"><div class="time">14:00</div><div><strong>Student Poster Session</strong><div class="small">Selected student posters & awards.</div></div></div>
-            <div class="session"><div class="time">16:30</div><div><strong>Closing Remarks</strong><div class="small">Vote of thanks and networking.</div></div></div>
+            <div class="session"><div class="time">09:30</div><div><strong>Workshops — Track A</strong><div class="small">Geochemical sampling.</div></div></div>
+            <div class="session"><div class="time">11:30</div><div><strong>Workshops — Track B</strong><div class="small">Remote sensing.</div></div></div>
+            <div class="session"><div class="time">14:00</div><div><strong>Student Poster</strong><div class="small">Selected posters & awards.</div></div></div>
+            <div class="session"><div class="time">16:30</div><div><strong>Closing</strong><div class="small">Vote of thanks & networking.</div></div></div>
           </div>
 
           <div class="card">
             <h3 style="margin-top:0">Useful Info</h3>
-            <ul style="margin:0;padding-left:18px;color:var(--muted)">
+            <ul style="margin:0;padding-left:18px;color:rgba(230,238,246,0.75)">
               <li>Registration desk opens at 08:30 on both days.</li>
-              <li>Certificate of participation provided to attendees.</li>
-              <li>Contact the organizers for exhibitor kit and stall booking.</li>
+              <li>Certificate of participation provided.</li>
+              <li>Contact organizers for exhibitor kit.</li>
             </ul>
           </div>
         </div>
       </section>
 
-      <section id="speakers">
+      <section id="speakers" class="fade-in">
         <h2>Speakers & Guests</h2>
         <div class="grid">
           <div class="card speaker">
@@ -210,7 +207,6 @@
             <div>
               <div style="font-weight:800">Dr. A. K. Reddy</div>
               <div class="small">Mineral Geologist — Andhra Geo Institute</div>
-              <div class="small">Keynote: Role of mineral exploration in regional development</div>
             </div>
           </div>
 
@@ -219,7 +215,6 @@
             <div>
               <div style="font-weight:800">Smt. S. Srinivas</div>
               <div class="small">Director, Mines Dept. — Andhra Pradesh</div>
-              <div class="small">Panel: Policy & regulation</div>
             </div>
           </div>
 
@@ -228,38 +223,27 @@
             <div>
               <div style="font-weight:800">Prof. P. Ramesh</div>
               <div class="small">Dept. of Earth Sciences — KL University</div>
-              <div class="small">Workshop Lead: Geochemical techniques</div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="exhibitors">
-        <h2>Exhibitors & Sponsors</h2>
-        <div style="display:flex;gap:12px;flex-wrap:wrap">
-          <div class="card" style="flex:1;min-width:220px"><strong>Andhra Geo Labs</strong><div class="small">Exhibitor — Exploration tools</div></div>
-          <div class="card" style="flex:1;min-width:220px"><strong>MineralTech Pvt Ltd</strong><div class="small">Exhibitor — Processing equipment</div></div>
-          <div class="card" style="flex:1;min-width:220px"><strong>KL University</strong><div class="small">Academic Partner</div></div>
-        </div>
-      </section>
-
-      <section id="venue">
+      <section id="venue" class="fade-in">
         <h2>Venue</h2>
-        <div class="card">
+        <div class="card section">
           <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">
             <div style="flex:1;min-width:260px">
               <strong>KL University, Vijayawada</strong>
-              <p class="small" style="margin-top:6px;color:var(--muted)">Address: KL University Campus, Vaddeswaram Road, Near Vijayawada — (Please confirm exact campus details with organizers.)</p>
-
+              <p class="small" style="margin-top:6px;color:rgba(230,238,246,0.75)">Address: KL University Campus, Vaddeswaram Road, Near Vijayawada — (Confirm exact campus details with organizers.)</p>
               <h4 style="margin-bottom:6px">Travel & Accommodation</h4>
-              <ul style="margin:0;padding-left:18px;color:var(--muted)">
+              <ul style="margin:0;padding-left:18px;color:rgba(230,238,246,0.75)">
                 <li>Nearest airport: Vijayawada Airport</li>
-                <li>Auto / taxi services available from Vijayawada city</li>
-                <li>Recommended hotels: (Nearby hotels list — update later)</li>
+                <li>Auto / taxi from city</li>
+                <li>Recommended hotels: Update later</li>
               </ul>
             </div>
             <div style="flex:1;min-width:260px">
-              <div class="map">
+              <div style="width:100%;height:260px;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.04)">
                 <iframe width="100%" height="100%" src="https://www.google.com/maps?q=KL+University+Vijayawada&output=embed" style="border:0" allowfullscreen="" loading="lazy"></iframe>
               </div>
             </div>
@@ -267,10 +251,10 @@
         </div>
       </section>
 
-      <section id="register">
+      <section id="register" class="fade-in">
         <h2>Register</h2>
-        <div class="card">
-          <p class="small">Please fill the form in the top-right or use the quick form below.</p>
+        <div class="card section">
+          <p class="small">Fill the quick form in the hero or use this form below.</p>
           <form id="regForm2" onsubmit="return submitForm(event)">
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
               <div>
@@ -297,9 +281,9 @@
         </div>
       </section>
 
-      <section id="contact">
+      <section id="contact" class="fade-in">
         <h2>Contact</h2>
-        <div class="card" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+        <div class="card section" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
           <div style="flex:1;min-width:240px">
             <div style="font-weight:800">Event Coordinator</div>
             <div class="small">Email: events@kluniversity.edu.in</div>
@@ -308,7 +292,7 @@
           <div style="flex:1;min-width:240px">
             <label for="msg">Send a message</label>
             <textarea id="msg" rows="3" placeholder="Your question or request"></textarea>
-            <div style="margin-top:8px"><button class="btn" onclick="alert('Message sent — replace with real handler')">Send</button></div>
+            <div style="margin-top:8px"><button class="btn" onclick="alert('Message sent — demo only')">Send</button></div>
           </div>
         </div>
       </section>
@@ -320,66 +304,127 @@
     </footer>
   </div>
 
-  <div id="modal" class="modal" role="dialog" aria-hidden="true">
-    <div class="modal-card">
-      <div id="modalContent"></div>
-      <div style="margin-top:12px;text-align:right"><button class="btn" onclick="closeModal()">Close</button></div>
+  <!-- Modal -->
+  <div id="modal" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,12,0.6);z-index:9997">
+    <div style="background:#071019;padding:20px;border-radius:12px;max-width:520px;width:90%">
+      <div id="modalInner"></div>
+      <div style="text-align:right;margin-top:12px"><button class="btn" onclick="closeModal()">Close</button></div>
     </div>
   </div>
 
   <script>
-    // Smooth scroll for nav links
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click',function(e){
-        const target = document.querySelector(this.getAttribute('href'));
-        if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'});}        
+    // ---------- Smooth show on scroll for elements with .fade-in ----------
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show'); });
+    },{threshold:0.12});
+    document.querySelectorAll('.fade-in').forEach(el=>io.observe(el));
+
+    // ---------- Parallax layers ----------
+    const layers = document.querySelectorAll('.layer');
+    window.addEventListener('scroll',()=>{
+      const st = window.scrollY;
+      layers.forEach(layer=>{
+        const speed = parseFloat(layer.getAttribute('data-speed')||0.2);
+        layer.style.transform = `translateY(${st * speed}px)`;
       });
-    });
+    },{passive:true});
 
-    function openModal(html){
+    // ---------- Modal helpers ----------
+    function openModal(kind){
       const modal = document.getElementById('modal');
-      document.getElementById('modalContent').innerHTML = html;
-      modal.classList.add('open');
-      modal.setAttribute('aria-hidden','false');
+      const inner = document.getElementById('modalInner');
+      if(kind==='info') inner.innerHTML = '<h3>Event Info</h3><p style="color:rgba(230,238,246,0.8)">This is a demo event page. Replace content and contact details with real data before publishing.</p>';
+      modal.style.display='flex';
     }
-    function closeModal(){
-      const modal = document.getElementById('modal');
-      modal.classList.remove('open');
-      modal.setAttribute('aria-hidden','true');
-    }
+    function closeModal(){ document.getElementById('modal').style.display='none'; }
 
+    // ---------- Registration (local demo) ----------
     function submitForm(e){
       e.preventDefault();
-      // gather data from either form
       const f = e.target;
       const data = {};
-      const fr = new FormData(f);
-      fr.forEach((v,k)=>data[k]=v);
-
-      // Simple validation
-      if(!data.name && !data.name2){
-        alert('Please enter your name'); return false;
-      }
-      const email = data.email || data.email2;
-      if(!email || !/\S+@\S+\.\S+/.test(email)){
-        alert('Please provide a valid email'); return false;
-      }
-
-      // Simulate successful submission — save to localStorage
+      new FormData(f).forEach((v,k)=>data[k]=v);
+      // Basic validation
+      if(!(data.name||data.name2)) return alert('Please enter your name');
+      const email = data.email||data.email2;
+      if(!email || !/\S+@\S+\.\S+/.test(email)) return alert('Please enter a valid email');
       let regs = JSON.parse(localStorage.getItem('mm_regs')||'[]');
-      regs.push({name: data.name||data.name2, email: email, org: data.org||data.org2||'', category: data.category||data.cat2||'', notes: data.notes||'' , ts: new Date().toISOString()});
+      regs.push({name: data.name||data.name2, email: email, org: data.org||data.org2||'', category: data.category||data.cat2||'', ts: new Date().toISOString()});
       localStorage.setItem('mm_regs', JSON.stringify(regs));
-
-      openModal('<h3>Registration received</h3><p class="small">Thank you for registering. A confirmation email will be sent to <strong>'+email+'</strong> (this is a demo — replace with real email handling).</p>');
-      // reset specific form fields
+      openModal('thanks');
+      document.getElementById('modalInner').innerHTML = `<h3>Thanks for registering</h3><p style="color:rgba(230,238,246,0.8)">We recorded your registration for <strong>${email}</strong>. (Local demo — integrate a backend for real registrations.)</p>`;
       f.reset();
       return false;
     }
 
-    // For demo: show saved registrations in console
-    window.addEventListener('load',()=>{
-      console.log('Saved registrations:', JSON.parse(localStorage.getItem('mm_regs')||'[]'));
+    // ---------- Custom cursor + particle trail (canvas) ----------
+    const cursorDot = document.getElementById('cursorDot');
+    const cursorBig = document.getElementById('cursorBig');
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    let W = canvas.width = window.innerWidth;
+    let H = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize',()=>{ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; });
+
+    const particles = [];
+    const maxParticles = 120;
+
+    const mouse = {x:W/2,y:H/2, vx:0, vy:0, down:false};
+
+    window.addEventListener('pointermove', (e)=>{
+      mouse.x = e.clientX; mouse.y = e.clientY;
+      cursorDot.style.transform = `translate(${mouse.x}px, ${mouse.y}px)`;
+      cursorBig.style.transform = `translate(${mouse.x}px, ${mouse.y}px)`;
+
+      // spawn particles
+      for(let i=0;i<2;i++) spawnParticle(mouse.x, mouse.y);
+    }, {passive:true});
+
+    window.addEventListener('pointerdown', (e)=>{ mouse.down=true; spawnBurst(mouse.x, mouse.y); cursorBig.style.transform = `translate(${mouse.x}px, ${mouse.y}px) scale(1.05)`; });
+    window.addEventListener('pointerup', ()=>{ mouse.down=false; cursorBig.style.transform = `translate(${mouse.x}px, ${mouse.y}px) scale(1)`; });
+
+    function spawnParticle(x,y){
+      if(particles.length > maxParticles) particles.shift();
+      particles.push({x,y, vx:(Math.random()-0.5)*1.6, vy:(Math.random()-0.5)*1.6 - 0.6, life:60 + Math.random()*40, size:2+Math.random()*3, hue: 30 + Math.random()*30});
+    }
+    function spawnBurst(x,y){ for(let i=0;i<18;i++){ particles.push({x,y, vx:(Math.random()-0.5)*6, vy:(Math.random()-0.5)*6 -2, life:30 + Math.random()*40, size:2+Math.random()*4, hue:20+Math.random()*40}) } }
+
+    function render(){
+      ctx.clearRect(0,0,W,H);
+      // subtle vignette
+      // draw particles
+      for(let i=particles.length-1;i>=0;i--){
+        const p = particles[i];
+        p.x += p.vx; p.y += p.vy; p.vy += 0.04; p.life -= 1; p.size *= 0.996;
+        if(p.life <=0 || p.size<0.3){ particles.splice(i,1); continue; }
+        ctx.beginPath();
+        const alpha = Math.max(0, Math.min(1, p.life/80));
+        ctx.fillStyle = `hsla(${p.hue}, 90%, 55%, ${alpha})`;
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+        ctx.fill();
+      }
+      requestAnimationFrame(render);
+    }
+    render();
+
+    // link hover interactions: enlarge big cursor
+    document.querySelectorAll('a, button, .btn, input').forEach(el=>{
+      el.addEventListener('pointerenter', ()=>{ cursorBig.style.transform = `translate(${mouse.x}px, ${mouse.y}px) scale(1.25)`; cursorDot.style.transform = `translate(${mouse.x}px, ${mouse.y}px) scale(0.7)`; });
+      el.addEventListener('pointerleave', ()=>{ cursorBig.style.transform = `translate(${mouse.x}px, ${mouse.y}px) scale(1)`; cursorDot.style.transform = `translate(${mouse.x}px, ${mouse.y}px) scale(1)`; });
     });
+
+    // prevent canvas from capturing pointer events and add mobile fallback
+    if(('ontouchstart' in window) || navigator.maxTouchPoints){ canvas.style.display='none'; document.getElementById('cursorDot').style.display='none'; document.getElementById('cursorBig').style.display='none'; }
+
+    // ---------- small accessibility: keyboard focus visual ----------
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Tab') document.body.classList.add('keyboard-nav'); });
+
+    // ---------- initial entrance animations ----------
+    window.addEventListener('load', ()=>{
+      document.querySelectorAll('.hero-content .fade-in, .hero .fade-in').forEach((el,i)=>{ setTimeout(()=>el.classList.add('show'), 220 + i*140); });
+    });
+
   </script>
 </body>
 </html>
