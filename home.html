@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Exhibition & Workshop on Mines and Minerals — KL University, Vijayawada</title>
+  <meta name="description" content="Exhibition cum Workshop on Mines and Minerals in Andhra Pradesh — 1-2 Nov 2025 at KL University, Vijayawada." />
+  <style>
+    :root{
+      --accent:#6b4f1d; /* earthy gold/brown */
+      --muted:#6b7280;
+      --bg:#f6f6f5;
+      --card:#ffffff;
+      --maxw:1100px;
+      --radius:12px;
+      --glass: rgba(255,255,255,0.6);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,#fbfbfa 0%,var(--bg) 100%);color:#222}
+    .wrap{max-width:var(--maxw);margin:24px auto;padding:0 18px}
+
+    /* Header / Hero */
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:56px;height:56px;border-radius:8px;background:linear-gradient(135deg,#9b6a2f,#e0c06b);display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+    nav{display:flex;gap:12px;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;font-weight:600}
+    .btn{background:var(--accent);color:white;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:700}
+
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-top:8px}
+    .hero-card{background:var(--card);padding:28px;border-radius:var(--radius);box-shadow:0 6px 24px rgba(31,41,55,0.06)}
+    .eyebrow{color:var(--accent);font-weight:700}
+    h1{margin:8px 0 6px;font-size:28px}
+    p.lead{color:var(--muted);margin:0 0 16px}
+    .meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
+    .meta div{background:var(--bg);padding:10px 12px;border-radius:10px;font-weight:600}
+
+    .register-card{padding:18px;border-radius:12px;background:linear-gradient(180deg,rgba(107,79,29,0.06),rgba(234,220,181,0.02));}
+    .form-row{display:flex;gap:8px;margin-bottom:10px}
+    input,select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e6e6e6}
+    label{font-size:13px;color:#444;margin-bottom:6px;display:block}
+    .small{font-size:13px;color:var(--muted)}
+
+    /* Sections */
+    section{margin:28px 0}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .card{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 6px 18px rgba(17,24,39,0.04)}
+    .speaker{display:flex;gap:12px;align-items:center}
+    .avatar{width:64px;height:64px;border-radius:8px;background:linear-gradient(135deg,#c7b197,#8f5d2a);display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+
+    /* Schedule */
+    .schedule-day{background:linear-gradient(180deg,#fff,#fbfaf8);padding:12px;border-radius:10px}
+    .session{display:flex;gap:12px;padding:8px 0;border-bottom:1px dashed #eee}
+    .session:last-child{border-bottom:0}
+    .time{min-width:86px;font-weight:700;color:var(--accent)}
+
+    /* Venue */
+    .map{width:100%;height:260px;border-radius:10px;overflow:hidden;border:1px solid #eaeaea}
+
+    /* Footer */
+    footer{padding:18px 0;color:var(--muted);text-align:center}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:repeat(1,1fr)}
+    }
+    @media (max-width:640px){
+      h1{font-size:22px}
+      .logo{width:48px;height:48px}
+    }
+
+    /* Modal */
+    .modal{position:fixed;inset:0;background:rgba(8,8,10,0.45);display:flex;align-items:center;justify-content:center;padding:20px;visibility:hidden;opacity:0;transition:all .2s}
+    .modal.open{visibility:visible;opacity:1}
+    .modal-card{background:var(--card);padding:20px;border-radius:12px;max-width:480px;width:100%}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">MM</div>
+        <div>
+          <div style="font-weight:800">Exhibition & Workshop</div>
+          <div style="font-size:13px;color:var(--muted)">Mines & Minerals — Andhra Pradesh</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#speakers">Speakers</a>
+        <a href="#venue">Venue</a>
+        <a href="#register" class="btn">Register</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="hero">
+        <div class="hero-card">
+          <div class="eyebrow">KL University • Vijayawada</div>
+          <h1>Exhibition cum Workshop on Mines & Minerals in Andhra Pradesh</h1>
+          <p class="lead">Join industry experts, researchers, students and government representatives for a two-day exhibition and hands-on workshop exploring the mining and mineral resources of Andhra Pradesh.</p>
+          <div class="meta">
+            <div>📅 01–02 Nov 2025</div>
+            <div>📍 KL University, Vijayawada</div>
+            <div>🎓 Students • Industry • Researchers</div>
+          </div>
+
+          <section style="margin-top:18px">
+            <h3 style="margin:0 0 8px">Why attend?</h3>
+            <ul style="margin:0;padding-left:18px;color:var(--muted)">
+              <li>Discover latest mineral exploration techniques and technologies.</li>
+              <li>Network with industry professionals and government agencies.</li>
+              <li>Hands-on workshops, panel discussions and exhibition stalls.</li>
+            </ul>
+          </section>
+
+          <div style="margin-top:18px;display:flex;gap:12px">
+            <a href="#register" class="btn">Register Now</a>
+            <a href="#schedule" style="text-decoration:none;padding:10px 14px;border-radius:8px;border:1px solid #eee;font-weight:700;color:var(--accent)">View Schedule</a>
+          </div>
+        </div>
+
+        <aside class="register-card">
+          <div style="font-weight:800;margin-bottom:8px">Register for the Event</div>
+          <form id="regForm" onsubmit="return submitForm(event)">
+            <div class="form-row">
+              <div style="flex:1">
+                <label for="name">Name</label>
+                <input id="name" name="name" placeholder="Your full name" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div style="flex:1">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="name@example.com" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div style="flex:1">
+                <label for="org">Organization</label>
+                <input id="org" name="org" placeholder="Company / University" />
+              </div>
+              <div style="width:150px">
+                <label for="category">Category</label>
+                <select id="category" name="category">
+                  <option>Student</option>
+                  <option>Faculty / Researcher</option>
+                  <option>Industry Professional</option>
+                  <option>Government</option>
+                </select>
+              </div>
+            </div>
+            <div style="margin-top:8px">
+              <label for="notes">Notes (optional)</label>
+              <textarea id="notes" name="notes" rows="3" placeholder="Dietary restrictions / queries"></textarea>
+            </div>
+            <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
+              <button type="submit" class="btn">Submit Registration</button>
+              <div class="small">No payment required for standard registration.</div>
+            </div>
+          </form>
+        </aside>
+      </div>
+
+      <section id="about">
+        <div class="card">
+          <h2 style="margin-top:0">About the Event</h2>
+          <p style="color:var(--muted)">This exhibition & workshop aims to showcase the mineral wealth and mining ecosystem of Andhra Pradesh. The event brings together academia, industry and government for knowledge exchange, demonstration of mining equipment, sample displays and hands-on training sessions for students and early-career researchers.</p>
+        </div>
+      </section>
+
+      <section id="schedule">
+        <h2>Schedule</h2>
+        <div class="grid">
+          <div class="card schedule-day">
+            <h3 style="margin-top:0">Day 1 — 01 Nov 2025</h3>
+            <div class="session"><div class="time">09:30</div><div><strong>Opening & Keynote</strong><div class="small">Inauguration and keynote address by industry leader.</div></div></div>
+            <div class="session"><div class="time">11:00</div><div><strong>Exhibition Opens</strong><div class="small">Stall visits and demo sessions.</div></div></div>
+            <div class="session"><div class="time">14:00</div><div><strong>Technical Session I</strong><div class="small">Mineral exploration techniques.</div></div></div>
+            <div class="session"><div class="time">16:00</div><div><strong>Panel Discussion</strong><div class="small">Sustainable mining practices.</div></div></div>
+          </div>
+
+          <div class="card schedule-day">
+            <h3 style="margin-top:0">Day 2 — 02 Nov 2025</h3>
+            <div class="session"><div class="time">09:30</div><div><strong>Workshops — Track A</strong><div class="small">Hands-on: Geochemical sampling & analysis.</div></div></div>
+            <div class="session"><div class="time">11:30</div><div><strong>Workshops — Track B</strong><div class="small">Remote sensing and mapping.</div></div></div>
+            <div class="session"><div class="time">14:00</div><div><strong>Student Poster Session</strong><div class="small">Selected student posters & awards.</div></div></div>
+            <div class="session"><div class="time">16:30</div><div><strong>Closing Remarks</strong><div class="small">Vote of thanks and networking.</div></div></div>
+          </div>
+
+          <div class="card">
+            <h3 style="margin-top:0">Useful Info</h3>
+            <ul style="margin:0;padding-left:18px;color:var(--muted)">
+              <li>Registration desk opens at 08:30 on both days.</li>
+              <li>Certificate of participation provided to attendees.</li>
+              <li>Contact the organizers for exhibitor kit and stall booking.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="speakers">
+        <h2>Speakers & Guests</h2>
+        <div class="grid">
+          <div class="card speaker">
+            <div class="avatar">AK</div>
+            <div>
+              <div style="font-weight:800">Dr. A. K. Reddy</div>
+              <div class="small">Mineral Geologist — Andhra Geo Institute</div>
+              <div class="small">Keynote: Role of mineral exploration in regional development</div>
+            </div>
+          </div>
+
+          <div class="card speaker">
+            <div class="avatar">SS</div>
+            <div>
+              <div style="font-weight:800">Smt. S. Srinivas</div>
+              <div class="small">Director, Mines Dept. — Andhra Pradesh</div>
+              <div class="small">Panel: Policy & regulation</div>
+            </div>
+          </div>
+
+          <div class="card speaker">
+            <div class="avatar">PR</div>
+            <div>
+              <div style="font-weight:800">Prof. P. Ramesh</div>
+              <div class="small">Dept. of Earth Sciences — KL University</div>
+              <div class="small">Workshop Lead: Geochemical techniques</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="exhibitors">
+        <h2>Exhibitors & Sponsors</h2>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <div class="card" style="flex:1;min-width:220px"><strong>Andhra Geo Labs</strong><div class="small">Exhibitor — Exploration tools</div></div>
+          <div class="card" style="flex:1;min-width:220px"><strong>MineralTech Pvt Ltd</strong><div class="small">Exhibitor — Processing equipment</div></div>
+          <div class="card" style="flex:1;min-width:220px"><strong>KL University</strong><div class="small">Academic Partner</div></div>
+        </div>
+      </section>
+
+      <section id="venue">
+        <h2>Venue</h2>
+        <div class="card">
+          <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">
+            <div style="flex:1;min-width:260px">
+              <strong>KL University, Vijayawada</strong>
+              <p class="small" style="margin-top:6px;color:var(--muted)">Address: KL University Campus, Vaddeswaram Road, Near Vijayawada — (Please confirm exact campus details with organizers.)</p>
+
+              <h4 style="margin-bottom:6px">Travel & Accommodation</h4>
+              <ul style="margin:0;padding-left:18px;color:var(--muted)">
+                <li>Nearest airport: Vijayawada Airport</li>
+                <li>Auto / taxi services available from Vijayawada city</li>
+                <li>Recommended hotels: (Nearby hotels list — update later)</li>
+              </ul>
+            </div>
+            <div style="flex:1;min-width:260px">
+              <div class="map">
+                <iframe width="100%" height="100%" src="https://www.google.com/maps?q=KL+University+Vijayawada&output=embed" style="border:0" allowfullscreen="" loading="lazy"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="register">
+        <h2>Register</h2>
+        <div class="card">
+          <p class="small">Please fill the form in the top-right or use the quick form below.</p>
+          <form id="regForm2" onsubmit="return submitForm(event)">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <div>
+                <label for="name2">Name</label>
+                <input id="name2" name="name2" required />
+              </div>
+              <div>
+                <label for="email2">Email</label>
+                <input id="email2" name="email2" type="email" required />
+              </div>
+              <div>
+                <label for="org2">Organization</label>
+                <input id="org2" name="org2" />
+              </div>
+              <div>
+                <label for="cat2">Category</label>
+                <select id="cat2" name="cat2"><option>Student</option><option>Faculty / Researcher</option><option>Industry Professional</option><option>Government</option></select>
+              </div>
+            </div>
+            <div style="margin-top:12px">
+              <button class="btn" type="submit">Submit Registration</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section id="contact">
+        <h2>Contact</h2>
+        <div class="card" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+          <div style="flex:1;min-width:240px">
+            <div style="font-weight:800">Event Coordinator</div>
+            <div class="small">Email: events@kluniversity.edu.in</div>
+            <div class="small">Phone: +91-XXXXXXXXXX</div>
+          </div>
+          <div style="flex:1;min-width:240px">
+            <label for="msg">Send a message</label>
+            <textarea id="msg" rows="3" placeholder="Your question or request"></textarea>
+            <div style="margin-top:8px"><button class="btn" onclick="alert('Message sent — replace with real handler')">Send</button></div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <div class="small">© 2025 Exhibition & Workshop on Mines & Minerals — KL University. All rights reserved.</div>
+    </footer>
+  </div>
+
+  <div id="modal" class="modal" role="dialog" aria-hidden="true">
+    <div class="modal-card">
+      <div id="modalContent"></div>
+      <div style="margin-top:12px;text-align:right"><button class="btn" onclick="closeModal()">Close</button></div>
+    </div>
+  </div>
+
+  <script>
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',function(e){
+        const target = document.querySelector(this.getAttribute('href'));
+        if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'});}        
+      });
+    });
+
+    function openModal(html){
+      const modal = document.getElementById('modal');
+      document.getElementById('modalContent').innerHTML = html;
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden','false');
+    }
+    function closeModal(){
+      const modal = document.getElementById('modal');
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden','true');
+    }
+
+    function submitForm(e){
+      e.preventDefault();
+      // gather data from either form
+      const f = e.target;
+      const data = {};
+      const fr = new FormData(f);
+      fr.forEach((v,k)=>data[k]=v);
+
+      // Simple validation
+      if(!data.name && !data.name2){
+        alert('Please enter your name'); return false;
+      }
+      const email = data.email || data.email2;
+      if(!email || !/\S+@\S+\.\S+/.test(email)){
+        alert('Please provide a valid email'); return false;
+      }
+
+      // Simulate successful submission — save to localStorage
+      let regs = JSON.parse(localStorage.getItem('mm_regs')||'[]');
+      regs.push({name: data.name||data.name2, email: email, org: data.org||data.org2||'', category: data.category||data.cat2||'', notes: data.notes||'' , ts: new Date().toISOString()});
+      localStorage.setItem('mm_regs', JSON.stringify(regs));
+
+      openModal('<h3>Registration received</h3><p class="small">Thank you for registering. A confirmation email will be sent to <strong>'+email+'</strong> (this is a demo — replace with real email handling).</p>');
+      // reset specific form fields
+      f.reset();
+      return false;
+    }
+
+    // For demo: show saved registrations in console
+    window.addEventListener('load',()=>{
+      console.log('Saved registrations:', JSON.parse(localStorage.getItem('mm_regs')||'[]'));
+    });
+  </script>
+</body>
+</html>
